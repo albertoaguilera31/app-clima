@@ -6,11 +6,29 @@ const fetchData = position =>{
     const {latitude, longitude} = position.coords;
     fetch(`https://api.openweathermap.org/data/2.5/weather?units=metric&lat=${latitude}&lon=${longitude}&appid=${ API_KEY}`)
     .then(response => response.json())
-    .then(data => console.log(data))
+    .then(data => setWeatherData(data));
     
     console.log(position);
 }
 
+const setWeatherData =data=>{
+    console.log(data);
+    const weatherData ={
+        location: data.name,
+        description: data.weather[0].main,
+        humidity: data.main.humidity,
+        pressure: data.main.pressure,
+        temperature: data.main.temp,
+        date: 'data',
+    }
+
+    Object.keys(weatherData).forEach(key => {
+        document.getElementById(key).textContent = weatherData[key];
+    });
+
+}
+
+getDate
 
 const onload = () =>{
     navigator.geolocation.getCurrentPosition(fetchData);
