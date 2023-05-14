@@ -19,7 +19,7 @@ const setWeatherData =data=>{
         humidity: data.main.humidity,
         pressure: data.main.pressure,
         temperature: data.main.temp,
-        date: 'data',
+        date: getDate(),
     }
 
     Object.keys(weatherData).forEach(key => {
@@ -28,7 +28,10 @@ const setWeatherData =data=>{
 
 }
 
-getDate
+const getDate =()=> {
+    let date = new Date();
+    return `${date.getDate()}-${('0' + (date.getMonth() +1)).slice(-2)}-${date.getFullYear()}`;
+}
 
 const onload = () =>{
     navigator.geolocation.getCurrentPosition(fetchData);
